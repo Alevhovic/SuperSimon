@@ -1,4 +1,4 @@
-# SuperSimon
+# About the project
 
 This is a HTML/CSS/JS project. Have fun !
 
