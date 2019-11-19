@@ -1,0 +1,131 @@
+body{ background-color: #101010; }
+
+h1{ 
+
+	font-size: 4.8rem; 
+	color: white;
+	text-shadow: 2px 2px 5px black;
+}
+
+button{ width: 100%; }
+
+.h-64 { height: 64px; }
+.h-128{	height: 128px; }
+.h-264{	height: 264px; }
+
+.col-t{
+
+	width: 100%; 
+	text-align:center; 
+	text-shadow: 1px 1px 3px black;
+	color: #7c7c7c;
+}
+ 
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12{}
+
+.bg-blue{ background-color: royalblue; }
+
+.bg-cyan{ background-color: darkcyan; }
+
+.bg-green{ background-color: limegreen; }
+
+.bg-red{ background-color: darkred; }
+
+.bg-purple{ background-color: darkviolet; }
+
+.bg-brown{ background-color: chocolate; }
+
+.bg-orange{ background-color: darkorange; }
+
+.bg-yellow{ background-color: yellow; }
+
+.bg-grey{ background-color: lightgray; }
+
+.bg-peru{ background-color: peru; }
+
+.bg-pink{ background-color: salmon; }
+
+.bg-silver{ background-color: silver; }
+
+.bg-gold{ background-color: gold; }
+
+.bg-logs, .bg-sec2, .bg-sec3, .bg-sec4, .bg-sec5{
+
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.bg-logs{ background-image: url("../img/bg-sec1.png"); }
+.bg-sec2{ background-image: url("../img/bg-sec2.png"); }
+.bg-sec3{ background-image: url("../img/bg-sec3.png"); }
+.bg-sec4{ background-image: url("../img/bg-sec4.png"); }
+.bg-sec5{ background-image: url("../img/bg-sec5.png"); }
+
+.bg-doctype, .bg-dark{ background-color: #1b1b1b !important; }
+
+.navbar{ border-bottom: 1px solid white; box-shadow: 2px 2px 5px black; }
+
+.console-text{
+
+	color: #9dadbd;
+	text-shadow: 0.5px 0.5px 1px black;
+  	padding-left: 10.1%;
+  	padding-top: 3.74%;
+}
+
+.game-running{ display: none; }
+
+.container{ padding-top: 56px; }
+
+.pt-15{ padding-top: 15px; }
+
+.pb-15{ padding-bottom: 15px; }
+
+.mt-10{ margin-top: 10px; }
+
+.btn-color{
+
+	height: 100%;	
+	border:2px solid grey;
+}
+
+hr{	border:0.5px solid #7c7c7c; }
+
+.ml10 {
+
+	display: block;
+  	position: relative;
+}
+
+.ml10 .text-wrapper {
+
+	position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.ml10 .letter {
+
+	display: inline-block;
+	transform-origin: 0 0;
+}
+
+.ml4 {
+
+	display: none;
+	position: relative;
+}
+
+.ml4 .letters {
+
+	position: absolute;
+	margin: auto;
+	opacity: 0; 
+}
+
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+
+	.console-text{ padding-left: 4.25%; }
+
+}
