@@ -8,6 +8,14 @@ This is a HTML/CSS/JS project. Have fun !
 - FontAwesome (Icons)
 - Anime.js (3 text effects)
 
+# My IDE
+
+- Windows 10 Professionnal
+- Sublime Text 3
+- GitHub Desktop
+- Google Chrome
+- Mozilla Firefox
+
 # Work In Progress
 
 - A functionnality
@@ -24,4 +32,4 @@ This is a HTML/CSS/JS project. Have fun !
 
 # This open source project
 
-You can use it, release and do modifications. BUT YOU CANNOT SELL IT / ASK SOMETHING LIKE BITCOIN FOR A TRADE.
+You can use it, release and do modifications. BUT YOU CANNOT SELL IT / ASK SOMETHING LIKE BITCOIN FOR A TRADE (GFY if you do something like this).
