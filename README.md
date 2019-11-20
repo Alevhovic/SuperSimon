@@ -14,7 +14,6 @@ This is a HTML/CSS/JS project. Have fun !
 - Sublime Text 3
 - GitHub Desktop
 - Google Chrome
-- Mozilla Firefox
 
 # Work In Progress
 
