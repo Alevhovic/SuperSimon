@@ -8,7 +8,13 @@ h1{
 	text-shadow: 2px 2px 5px black;
 }
 
+h5{
+	z-index: 999;
+}
+
 button{ width: 100%; }
+
+button:focus{ outline: none; }
 
 hr{	border:0.5px solid #7c7c7c; }
 
@@ -26,6 +32,9 @@ hr{	border:0.5px solid #7c7c7c; }
 	text-shadow: 1px 1px 3px black;
 	color: #7c7c7c;
 }
+
+.t-a-l { text-align: left; }
+.t-a-r { text-align: right; }
  
 .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12{}
 
@@ -79,9 +88,7 @@ hr{	border:0.5px solid #7c7c7c; }
   	padding-top: 3.74%;
 }
 
-.game-running{ display: none; }
-
-.game-finish{ display: none; }
+.game-text{ display: none; }
 
 .container{ padding-top: 56px; }
 
@@ -105,16 +112,7 @@ hr{	border:0.5px solid #7c7c7c; }
 
 .btn-blue{ background-color: darkblue; }
 
-.btn-yellow{ background-color: gold; }
-
-
-
-
-
-
-
-
-
+.btn-yellow{ background-color: goldenrod; }
 
 .ml10 {
 
@@ -150,9 +148,32 @@ hr{	border:0.5px solid #7c7c7c; }
 
 
 
+.video-container {
 
+    overflow: hidden;
+    position: relative;
+    border:2px solid white;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px black;
 
+}
 
+video {
+
+	min-width: 100%;
+	min-height: 64px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+#containerRunningVideo, #containerFinishVideo { display: none; }
+
+#finishVideo {transform: translateX(-50%) translateY(-47.5%);}
+
+#welcomeVideo {transform: translateX(-50%) translateY(-50%);}
+
+#runningVideo {transform: translateX(-50%) translateY(-47.5%);}
 
 
 

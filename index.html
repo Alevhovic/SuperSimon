@@ -17,6 +17,22 @@
 
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 
+		<audio id="sound1">
+			<source src="sound/sound-1.mp3">
+		</audio>
+
+		<audio id="sound2">
+			<source src="sound/sound-2.mp3">
+		</audio>
+
+		<audio id="sound3">
+			<source src="sound/sound-3.mp3">
+		</audio>
+
+		<audio id="sound4">
+			<source src="sound/sound-4.mp3">
+		</audio>
+
 	</head>
 
 	<body>
@@ -99,7 +115,7 @@
 					<div class="col-10 h-64">		
 						
 
-						<p class="ml10 console-text">
+						<p id="welcomeText" class="ml10 console-text">
 
 							<span class="text-wrapper">
 
@@ -110,7 +126,7 @@
 						</p>	
 
 						<!-- Start Game-->
-						<p class="ml4 console-text">
+						<p id="textRunning" class="ml4 console-text">
 
   							<span class="letters letters-1">Attention !</span>
   							<span class="letters letters-2">Prêt ?</span>
@@ -119,10 +135,13 @@
 						</p>
 
 						<!-- Game is running -->
-						<p class="console-text game-running">Une partie est en cours...</p>
+						<p class="console-text game-text" id="runningText">Une partie est en cours...</p>
+
+						<!-- Player fail -->
+						<p class="console-text game-text" id="failedText">Partie terminée, vous vous êtes trompé.</p>
 
 						<!-- Game is finish -->
-						<p class="console-text game-finish">Partie terminée...</p>
+						<p class="console-text game-text" id="finishText">Vous avez gagné la partie ! Vous êtes juste incroyable !</p>
 
 					</div>
 
@@ -150,13 +169,13 @@
 
 					<div class="col-3 h-264 pt-15 pb-15"> 
 
-						<button class="btn-color btn-green">Vert</button>
+						<button id="btnTopLeft" class="btn-color btn-green">Vert</button>
 
 					</div>
 
 					<div class="col-3 h-264 pt-15 pb-15">   
 
-						<button class="btn-color btn-red">Rouge</button>
+						<button id="btnTopRight" class="btn-color btn-red">Rouge</button>
 
 					</div>
 					
@@ -166,9 +185,9 @@
 
 						<hr>
 
-						<button type="button" class="btn btn-outline-light">Start</button>
+						<button type="button" id="btnStart" class="btn btn-outline-light">Start</button>
 
-						<button type="button" class="btn btn-outline-light mt-10">Stop</button>
+						<button type="button" id="btnStop" class="btn btn-outline-light mt-10">Stop</button>
 
 						<button type="button" class="btn btn-outline-light mt-10">Ré-initialiser</button>
 
@@ -192,13 +211,13 @@
 					<div class="col-2 h-264">  <p class="col-t col-t-264"></p></div>				
 					<div class="col-3 h-264 pt-15 pb-15"> 
 
-						<button class="btn-color btn-yellow">Jaune</button>
+						<button id="btnBotLeft" class="btn-color btn-yellow">Jaune</button>
 
 					</div>
 
 					<div class="col-3 h-264 pt-15 pb-15">   
 
-						<button class="btn-color btn-blue">Bleu</button>
+						<button id="btnBotRight" class="btn-color btn-blue">Bleu</button>
 
 					</div>
 					
@@ -208,11 +227,53 @@
 
 						<hr>
 
-						<p class="col-t">Some informations...</p>
+						<div class="row">
 
-						<p class="col-t">Some informations...</p>
+							<div class="col-6">
 
-						<p class="col-t">Some informations...</p>
+								<p class="col-t t-a-l">Tour(s)</p>
+
+								<p class="col-t t-a-l">Meilleur</p>
+
+								<p class="col-t t-a-l">Niveau</p>
+
+							</div>
+
+							<div class="col-2">
+
+								<p>:</p>
+
+								<p>:</p>
+
+								<p>:</p>
+
+							</div>
+
+							<div class="col-4">
+
+								<p id="turn" class="col-t t-a-r">
+									
+									<span id="turn" class='badge badge-warning'>Inactif</span>
+
+								</p>
+
+								<p class="col-t t-a-r">
+
+									<span id="turn" class='badge badge-warning'>0</span>
+
+								</p>
+
+								<p class="col-t t-a-r">
+
+									<span id="top" class='badge badge-info'>Normal</span>
+
+								</p>
+
+							</div>
+
+						</div>						
+
+						
 
 					</div>
 
@@ -226,20 +287,66 @@
 
 				<div class="row bg-sec4">
 
-					<div class="col-3 h-64">	<p class="col-t col-t-64">3</p></div>
+					<div class="col-3 h-64">
+
+						<p class="col-t col-t-64"></p>
+
+					</div>
 					
-					<div class="col-6 h-64">	<p class="col-t col-t-64">6</p></div>
+					<div class="col-6 h-64">	
+
+						<div class="video-container" id="containerWelcomeVideo">
+
+					    	<video autoplay muted loop id="welcomeVideo">
+
+	                		    <source src="video/welcome.mp4" type="video/mp4">
+
+	            			</video> 
+
+	            			<h2>Chargement en cours...</h2>
+
+            			</div> 
+
+            			<div class="video-container" id="containerRunningVideo">
+
+					    	<video autoplay muted loop id="runningVideo">
+
+	                		    <source src="video/playing.mp4" type="video/mp4">
+
+	            			</video> 
+
+	            			<h2>Chargement en cours...</h2>
+
+            			</div>   
+
+            			<div class="video-container" id="containerFinishVideo">
+
+					    	<video autoplay muted loop id="finishVideo">
+
+	                		    <source src="video/win.mp4" type="video/mp4">
+
+	            			</video> 
+
+	            			<h2>Chargement en cours...</h2>	
+
+            			</div> 
+
+					</div>
 					
-					<div class="col-3 h-64">	<p class="col-t col-t-64">3</p></div>
+					<div class="col-3 h-64">	
+
+						<p class="col-t col-t-64"></p>
+
+					</div>
 
 				</div>
 
 				<div class="row bg-sec5">
 
-					<div class="col-3 h-128">	<p class="col-t col-t-128">3</p></div>
-					<div class="col-3 h-128">	<p class="col-t col-t-128">3</p></div>
-					<div class="col-3 h-128">	<p class="col-t col-t-128">3</p></div>
-					<div class="col-3 h-128">	<p class="col-t col-t-128">3</p></div>
+					<div class="col-3 h-128">	<p class="col-t col-t-128"></p></div>
+					<div class="col-3 h-128">	<p class="col-t col-t-128"></p></div>
+					<div class="col-3 h-128">	<p class="col-t col-t-128"></p></div>
+					<div class="col-3 h-128">	<p class="col-t col-t-128"></p></div>
 					
 
 				</div>
@@ -276,7 +383,7 @@
 
 	    <!-- Personal JS -->
 	    <script src="js/script.js"></script>
-
+	    <script src="js/effects.js"></script>
 	</body>
 
 </html>

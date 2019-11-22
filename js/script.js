@@ -1,69 +1,442 @@
-// Wrap every letter in a span
-var textWrapper = document.querySelector('.ml10 .letters');
-textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+// --------------------------------------------------------------------------------------------------
+// -- Variables
+// --------------------------------------------------------------------------------------------------
 
-anime.timeline({loop: true})
-  .add({
-    targets: '.ml10 .letter',
-    rotateY: [-90, 0],
-    duration: 1300,
-    delay: (el, i) => 45 * i
-  }).add({
-    targets: '.ml10',
-    opacity: 0,
-    duration: 1000,
-    easing: "easeOutExpo",
-    delay: 1000
+let order = [];
+let playerOrder = [];
+let flash;
+let turn;
+let good;
+let compTurn;
+let intervalId;
+let noise = true;
+let gameRunning = false;
+let win;
+let topScore;
+let topScoreCount;
+
+// --------------------------------------------------------------------------------------------------
+// -- Configuration
+// --------------------------------------------------------------------------------------------------
+
+const winValue = 5; // Value to win the game !
+const debug    = false; // true = MANY console.log in console
+
+// --------------------------------------------------------------------------------------------------
+// -- HTML Elements
+// --------------------------------------------------------------------------------------------------
+
+// Button Element
+const btnTopLeft    = document.querySelector("#btnTopLeft");
+const btnTopRight   = document.querySelector("#btnTopRight");
+const btnBotLeft    = document.querySelector("#btnBotLeft");
+const btnBotRight   = document.querySelector("#btnBotRight");
+const btnStart      = document.querySelector("#btnStart");
+
+// Text Element
+const welcomeText   = document.querySelector("#welcomeText");
+const runningText   = document.querySelector("#runningText");
+const finishText    = document.querySelector("#finishText");
+const failedText    = document.querySelector("#failedText");
+const turnCounter   = document.querySelector("#turn");
+const topScoreText  = document.querySelector("#top");
+
+// Video Element
+const finishVideo   = document.querySelector("#containerFinishVideo");
+const runningVideo  = document.querySelector("#containerRunningVideo");
+const welcomeVideo  = document.querySelector("#containerWelcomeVideo");
+
+// --------------------------------------------------------------------------------------------------
+// -- Functions
+// --------------------------------------------------------------------------------------------------
+
+// Debug
+function debugFunc(who,text) {
+
+    if (debug) {
+
+        if (who == "s") {
+
+            obj1 = "SCRIPT :";
+            obj2 = text;
+
+            console.log(obj1, obj2);
+
+        } else if (who == "g") {
+
+            obj1 = "GAME :";
+            obj2 = text;
+
+            console.log(obj1, obj2);
+        
+        } else if (who == "p") {
+
+            obj1 = "PLAYER :";
+            obj2 = text;
+
+            console.log(obj1, obj2);
+        }
+    }
+}
+
+// Play
+function play() {
+
+    win = false;
+    order = [];
+    playerOrder = [];
+    flash = 0;
+    intervalId = 0;
+    turn = 1;
+    turnCounter.innerHTML = 1;
+    good = true;
+
+    for (var i = 0; i < winValue; i++) {
+
+        order.push(Math.floor(Math.random() * 4) + 1);
+
+    }
+
+    compTurn = true;
+
+    intervalId = setInterval(gameTurn, 1000);
+}
+
+// GameTurn
+function gameTurn() {    
+
+    gameRunning = false;
+
+    if (flash == turn) {      
+
+        clearInterval(intervalId);
+
+        compTurn = false;
+
+        btnClearColor();
+
+        gameRunning = true; 
+
+        debugFunc("g", "Computer have finish.");
+    }
+
+    if (compTurn) {
+
+        debugFunc("g","Computer choose a button.");
+
+        btnClearColor();
+
+        setTimeout(() => {
+
+            if (order[flash] == 1) btnOne();
+            if (order[flash] == 2) btnTwo();
+            if (order[flash] == 3) btnThree();
+            if (order[flash] == 4) btnFour();
+
+            flash++;
+
+        }, 200);
+
+    }
+
+}
+
+// BTN : TOP LEFT (Sound & Background when clicking)
+function btnOne() {
+
+    if (noise) {
+
+        debugFunc("s", "BTN 1 - Sounding");
+
+        let audio = document.getElementById("sound1");
+        audio.play();
+    }
+    
+    noise = true;
+    btnTopLeft.style.backgroundColor = "lightgreen";
+
+}
+
+// BTN : TOP RIGHT (Sound & Background when clicking)
+function btnTwo() {
+
+    if (noise) {
+
+        debugFunc("s", "BTN 2 - Sounding");
+
+        let audio = document.getElementById("sound2");
+        audio.play();
+    }
+
+    noise = true;
+    btnTopRight.style.backgroundColor = "tomato";
+
+}
+
+// BTN : BOTTOM LEFT (Sound & Background when clicking)
+function btnThree() {
+
+    if (noise) {
+
+        debugFunc("s", "BTN 3 - Sounding");
+
+        let audio = document.getElementById("sound3");
+        audio.play();
+    }
+
+    noise = true;
+    btnBotLeft.style.backgroundColor = "yellow";
+
+}
+
+// BTN : BOTTOM RIGHT (Sound & Background when clicking)
+function btnFour() {
+
+    if (noise) {
+
+        debugFunc("s", "BTN 4 - Sounding");
+
+        let audio = document.getElementById("sound4");
+        audio.play();
+    }
+
+    noise = true;
+    btnBotRight.style.backgroundColor = "royalblue";
+
+}
+
+// COLOR ORIGIN ON BUTTON
+function btnClearColor() {
+
+    debugFunc("s", "BTN - ClearColor");
+
+    btnTopLeft.style.backgroundColor  = "darkgreen";
+    btnTopRight.style.backgroundColor = "darkred";
+    btnBotLeft.style.backgroundColor  = "goldenrod";
+    btnBotRight.style.backgroundColor = "darkblue";
+}
+
+// CHANGE BUTTON COLOR
+function btnFlashColor() {
+
+    debugFunc("s", "BTN - FlashColor");
+
+    btnTopLeft.style.backgroundColor  = "lightgreen";
+    btnTopRight.style.backgroundColor = "tomato";
+    btnBotLeft.style.backgroundColor  = "yellow";
+    btnBotRight.style.backgroundColor = "royalblue";    
+}
+
+// Check what the player is doing
+function check() {
+
+if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1])
+
+    good = false;
+    
+    // IF the player WIN
+    if (playerOrder.length == winValue && good) {
+               
+        winGame(winValue);
+    }
+
+    // IF the player FAIL
+    if (good == false) {
+
+        debugFunc("g", "Player have miss");
+
+        welcomeText.style.display = "none"; 
+        runningText.style.display = "none";
+        finishText.style.display  = "none";
+        failedText.style.display  = "block";
+
+
+        finishVideo.style.display  = "none";
+        runningVideo.style.display = "none";
+        welcomeVideo.style.display = "block";
+
+        btnFlashColor();
+        turnCounter.innerHTML = "<span class='badge badge-danger'>FAIL</span>";
+        
+        topScoreFunc(turn);
+
+        noise = false;
+    
+    }
+
+    if (turn == playerOrder.length && good && !win) {
+
+        turn++;
+        playerOrder = [];
+        compTurn = true;
+        flash = 0;
+        turnCounter.innerHTML = turn;
+        intervalId = setInterval(gameTurn, 1000);
+    }
+
+}
+
+// When the player win the game do this
+function winGame(turn) {
+       
+    runningText.style.display = "none";
+    welcomeText.style.display  = "none";
+    failedText.style.display  = "none";
+    finishText.style.display  = "block";
+
+    welcomeVideo.style.display = "none";    
+    runningVideo.style.display = "none";
+    finishVideo.style.display  = "block";
+
+    btnFlashColor();
+
+    turnCounter.innerHTML = "<span class='badge badge-success'>GG !</span>";
+    gameRunning = false;
+    win = true;
+
+    topScoreFunc(turn);
+
+    debugFunc("s", "Player finish the game !");
+}
+
+function topScoreFunc(turn) {
+
+    topScoreCount = turn;
+
+    if (topScoreCount < topScore) {
+
+        debugFunc("s", "Le joueur a fait un plus PETIT score");
+        topScoreText.innerHTML = topScore;
+
+    } else {
+
+        debugFunc("s", "Le joueur a fait un plus GRAND score");
+
+        topScoreText.innerHTML = turn;
+        topScore = topScoreCount;
+        
+    }
+
+}
+
+// --------------------------------------------------------------------------------------------------
+// -- EVENTS : CLICK
+// --------------------------------------------------------------------------------------------------
+
+btnStart.addEventListener('click', (event) => {
+
+    debugFunc("p","BTN START - Click");
+
+    welcomeText.style.display = "none";    
+    finishText.style.display  = "none";
+    failedText.style.display  = "none";
+    runningText.style.display = "block";
+
+    welcomeVideo.style.display = "none";
+    finishVideo.style.display  = "none";
+    runningVideo.style.display = "block";
+
+    gameRunning = true;
+  
+    if (gameRunning || win) { 
+
+        debugFunc("g","Is now start");
+
+        play(); 
+    }
+
+})
+
+// BUTTON : TOP LEFT
+btnTopLeft.addEventListener('click', (event) => {
+
+    debugFunc("p", "BTN 1 - Click")
+    
+    if (gameRunning) {      
+
+        playerOrder.push(1);
+        check();
+        btnOne();
+
+        if (!win) {
+
+            setTimeout(() => {
+
+                btnClearColor();
+
+            }, 300);
+
+        }
+    }
+
+})
+
+// BUTTON : TOP RIGHT
+btnTopRight.addEventListener('click', (event) => {
+
+    debugFunc("p", "BTN 2 - Click")
+    
+    if (gameRunning) {
+
+        playerOrder.push(2);
+        check();
+        btnTwo();
+        
+        if(!win) {
+
+            setTimeout(() => {
+
+                btnClearColor();
+
+            }, 300);
+        }
+    }
+
 });
 
-var ml4 = {};
-ml4.opacityIn = [0,1];
-ml4.scaleIn = [0.2, 1];
-ml4.scaleOut = 3;
-ml4.durationIn = 800;
-ml4.durationOut = 600;
-ml4.delay = 500;
+// BUTTON : BOTTOM LEFT
+btnBotLeft.addEventListener('click', (event) => {
 
-anime.timeline({loop: true})
-  .add({
-    targets: '.ml4 .letters-1',
-    opacity: ml4.opacityIn,
-    scale: ml4.scaleIn,
-    duration: ml4.durationIn
-  }).add({
-    targets: '.ml4 .letters-1',
-    opacity: 0,
-    scale: ml4.scaleOut,
-    duration: ml4.durationOut,
-    easing: "easeInExpo",
-    delay: ml4.delay
-  }).add({
-    targets: '.ml4 .letters-2',
-    opacity: ml4.opacityIn,
-    scale: ml4.scaleIn,
-    duration: ml4.durationIn
-  }).add({
-    targets: '.ml4 .letters-2',
-    opacity: 0,
-    scale: ml4.scaleOut,
-    duration: ml4.durationOut,
-    easing: "easeInExpo",
-    delay: ml4.delay
-  }).add({
-    targets: '.ml4 .letters-3',
-    opacity: ml4.opacityIn,
-    scale: ml4.scaleIn,
-    duration: ml4.durationIn
-  }).add({
-    targets: '.ml4 .letters-3',
-    opacity: 0,
-    scale: ml4.scaleOut,
-    duration: ml4.durationOut,
-    easing: "easeInExpo",
-    delay: ml4.delay
-  }).add({
-    targets: '.ml4',
-    opacity: 0,
-    duration: 500,
-    delay: 500
-  });
+    debugFunc("p", "BTN 3 - Click")
+    
+    if (gameRunning) {
+
+        playerOrder.push(3);
+        check();
+        btnThree();
+        
+        if(!win) {
+            
+            setTimeout(() => {
+                
+                btnClearColor();
+            
+            }, 300);
+        }
+    }
+
+})
+
+// BUTTON : BOTTOM RIGHT
+btnBotRight.addEventListener('click', (event) => {
+
+    debugFunc("p", "BTN 4 - Click")
+
+    if (gameRunning) {
+
+        playerOrder.push(4);
+        check();
+        btnFour();
+
+        if(!win) {
+
+            setTimeout(() => {
+
+                btnClearColor();
+
+            }, 300);
+
+        }
+    }
+
+})
