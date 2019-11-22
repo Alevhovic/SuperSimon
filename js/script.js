@@ -2,25 +2,27 @@
 // -- Variables
 // --------------------------------------------------------------------------------------------------
 
-let order = [];
-let playerOrder = [];
 let flash;
 let turn;
 let good;
 let compTurn;
 let intervalId;
-let noise = true;
-let gameRunning = false;
 let win;
 let topScore;
 let topScoreCount;
+
+let noise = true;
+let gameRunning = false;
+
+let order = [];
+let playerOrder = [];
 
 // --------------------------------------------------------------------------------------------------
 // -- Configuration
 // --------------------------------------------------------------------------------------------------
 
 const winValue = 5; // Value to win the game !
-const debug    = false; // true = MANY console.log in console
+const debug    = false; // true = MANY console.log
 
 // --------------------------------------------------------------------------------------------------
 // -- HTML Elements
@@ -34,10 +36,12 @@ const btnBotRight   = document.querySelector("#btnBotRight");
 const btnStart      = document.querySelector("#btnStart");
 
 // Text Element
-const welcomeText   = document.querySelector("#welcomeText");
 const runningText   = document.querySelector("#runningText");
 const finishText    = document.querySelector("#finishText");
 const failedText    = document.querySelector("#failedText");
+const turnInactiv   = document.querySelector("#turnInactiv");
+const turnActiv     = document.querySelector("#turnActiv");
+const turnFail      = document.querySelector("#turnFail");
 const turnCounter   = document.querySelector("#turn");
 const topScoreText  = document.querySelector("#top");
 
@@ -45,6 +49,9 @@ const topScoreText  = document.querySelector("#top");
 const finishVideo   = document.querySelector("#containerFinishVideo");
 const runningVideo  = document.querySelector("#containerRunningVideo");
 const welcomeVideo  = document.querySelector("#containerWelcomeVideo");
+
+// Modal Element
+const beReadyDude   = document.querySelector("#beReadyDude");
 
 // --------------------------------------------------------------------------------------------------
 // -- Functions
@@ -82,14 +89,16 @@ function debugFunc(who,text) {
 // Play
 function play() {
 
-    win = false;
     order = [];
     playerOrder = [];
+
     flash = 0;
     intervalId = 0;
     turn = 1;
     turnCounter.innerHTML = 1;
+   
     good = true;
+    win = false;
 
     for (var i = 0; i < winValue; i++) {
 
@@ -154,7 +163,6 @@ function btnOne() {
     
     noise = true;
     btnTopLeft.style.backgroundColor = "lightgreen";
-
 }
 
 // BTN : TOP RIGHT (Sound & Background when clicking)
@@ -170,7 +178,6 @@ function btnTwo() {
 
     noise = true;
     btnTopRight.style.backgroundColor = "tomato";
-
 }
 
 // BTN : BOTTOM LEFT (Sound & Background when clicking)
@@ -186,7 +193,6 @@ function btnThree() {
 
     noise = true;
     btnBotLeft.style.backgroundColor = "yellow";
-
 }
 
 // BTN : BOTTOM RIGHT (Sound & Background when clicking)
@@ -202,7 +208,6 @@ function btnFour() {
 
     noise = true;
     btnBotRight.style.backgroundColor = "royalblue";
-
 }
 
 // COLOR ORIGIN ON BUTTON
@@ -245,23 +250,28 @@ if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1])
 
         debugFunc("g", "Player have miss");
 
-        welcomeText.style.display = "none"; 
-        runningText.style.display = "none";
-        finishText.style.display  = "none";
-        failedText.style.display  = "block";
+        welcomeContainer.style.display = "none"; 
+        chooseText.style.display       = "none";
+        runningText.style.display      = "none";
+        finishText.style.display       = "none";
+        failedText.style.display       = "block";
 
+        btnStart.style.display = "block";
 
         finishVideo.style.display  = "none";
         runningVideo.style.display = "none";
         welcomeVideo.style.display = "block";
 
+        turnInactiv.style.display = "none";
+        turnActiv.style.display   = "none";
+        turnGG.style.display      = "none";
+        turnFail.style.display    = "block";
+
         btnFlashColor();
-        turnCounter.innerHTML = "<span class='badge badge-danger'>FAIL</span>";
-        
+                
         topScoreFunc(turn);
 
-        noise = false;
-    
+        noise = false;    
     }
 
     if (turn == playerOrder.length && good && !win) {
@@ -279,18 +289,25 @@ if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1])
 // When the player win the game do this
 function winGame(turn) {
        
-    runningText.style.display = "none";
-    welcomeText.style.display  = "none";
-    failedText.style.display  = "none";
-    finishText.style.display  = "block";
+    runningText.style.display      = "none";
+    welcomeContainer.style.display = "none";
+    chooseText.style.display       = "none"; 
+    failedText.style.display       = "none";
+    finishText.style.display       = "block";
 
     welcomeVideo.style.display = "none";    
     runningVideo.style.display = "none";
     finishVideo.style.display  = "block";
 
-    btnFlashColor();
+    btnStart.style.display = "block";
 
-    turnCounter.innerHTML = "<span class='badge badge-success'>GG !</span>";
+    turnInactiv.style.display = "none";
+    turnActiv.style.display   = "none";
+    turnFail.style.display    = "none";
+    turnGG.style.display      = "block";
+
+    btnFlashColor();
+    
     gameRunning = false;
     win = true;
 
@@ -327,25 +344,46 @@ btnStart.addEventListener('click', (event) => {
 
     debugFunc("p","BTN START - Click");
 
-    welcomeText.style.display = "none";    
-    finishText.style.display  = "none";
-    failedText.style.display  = "none";
-    runningText.style.display = "block";
+    welcomeContainer.style.display = "none";
+    chooseText.style.display       = "none";    
+    finishText.style.display       = "none";
+    failedText.style.display       = "none";
+    runningText.style.display      = "block";
 
     welcomeVideo.style.display = "none";
     finishVideo.style.display  = "none";
     runningVideo.style.display = "block";
 
-    gameRunning = true;
+    turnInactiv.style.display = "none";    
+    turnGG.style.display      = "none";
+    turnFail.style.display    = "none";
+    turnActiv.style.display   = "block";   
+
+    btnStart.style.display = "none";
+
+    textEffectStartGame();
+
+    setTimeout(() => {
+
+        beReadyDude.style.display = "block";
+        gameRunning = false;
+
+    },10); 
+
+    setTimeout(() => {
+
+        beReadyDude.style.display = "none";
+        play();
+
+    },4500);  
   
     if (gameRunning || win) { 
 
-        debugFunc("g","Is now start");
-
-        play(); 
+        debugFunc("g","Is now start");  
+        play();     
     }
 
-})
+});
 
 // BUTTON : TOP LEFT
 btnTopLeft.addEventListener('click', (event) => {
@@ -369,7 +407,7 @@ btnTopLeft.addEventListener('click', (event) => {
         }
     }
 
-})
+});
 
 // BUTTON : TOP RIGHT
 btnTopRight.addEventListener('click', (event) => {
@@ -415,7 +453,7 @@ btnBotLeft.addEventListener('click', (event) => {
         }
     }
 
-})
+});
 
 // BUTTON : BOTTOM RIGHT
 btnBotRight.addEventListener('click', (event) => {
@@ -439,4 +477,4 @@ btnBotRight.addEventListener('click', (event) => {
         }
     }
 
-})
+});

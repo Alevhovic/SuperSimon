@@ -37,6 +37,31 @@
 
 	<body>
 
+		<div id="beReadyDude" class="modal" style="position: absolute; width: 100vw; height: 100vh; background-color: rgba(12,12,12,0.95); display: none;">
+
+			<div class="container">			
+
+				<div class="col-12" style="padding-top: 33%;">
+
+					<div class="text-center">
+
+						<!-- Start Game-->
+						<h3 class="ml4">
+
+  							<span class="letters letters-1">Attention !</span>
+  							<span class="letters letters-2">Prêt ?</span>
+  							<span class="letters letters-3">C'est parti !</span>
+
+						</h3>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
 		<!-- HEADER -->
 		<header>
 			
@@ -46,10 +71,6 @@
     				<img src="img/dice.png" width="30" height="30" class="d-inline-block align-top" alt="Logo du site">
     				Hello, World !
   				</a>
-
-  				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    				<span class="navbar-toggler-icon"></span>
-  				</button>
   				
   				<div class="collapse navbar-collapse" id="navbarText">
     				<ul class="navbar-nav mr-auto">      					
@@ -68,54 +89,38 @@
 		<!-- MAIN -->
 		<main>
 
-			<div class="container bg-doctype">
+			<div class="container bg-doctype">				
 
-				<div class="row">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 h-128">
 
-					<div class="col-1 h-128">
+					<div class="text-center">
 
-						<p class="col-t col-t-128"></p>
+						<h1 class="ml11">
 
-					</div>
+							<span class="text-wrapper">
 
-					<div class="col-10 h-128">
+							<span class="letters">Simon</span>
 
-						<div class="text-center">
+							</span>
 
-							<h1 class="ml11">
-
-  								<span class="text-wrapper">
-
-    								<span class="letters">Simon</span>
-
-  								</span>
-
-							</h1>
-
-						</div>
+						</h1>
 
 					</div>
 
-					<div class="col-1 h-128">	
-
-						<p class="col-t col-t-128"></p>
-
-					</div>
-
-				</div>
+				</div>				
 
 				<div class="row bg-logs">
 
-					<div class="col-1 h-64">	
+					<div class="col-lg-1 col-xl-1 h-64 hide-r">	
 
 						<p class="col-t col-t-64"></p>
 
 					</div>
 						
-					<div class="col-10 h-64">		
+					<div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 h-64">		
 						
 
-						<p id="welcomeText" class="ml10 console-text">
+						<p id="welcomeContainer" class="ml10 console-text">
 
 							<span class="text-wrapper">
 
@@ -125,27 +130,21 @@
 
 						</p>	
 
-						<!-- Start Game-->
-						<p id="textRunning" class="ml4 console-text">
-
-  							<span class="letters letters-1">Attention !</span>
-  							<span class="letters letters-2">Prêt ?</span>
-  							<span class="letters letters-3">C'est parti !</span>
-
-						</p>
+						<!-- Game is waiting -->
+						<p class="console-text game-text" id="chooseText">Lance une partie !</p>		
 
 						<!-- Game is running -->
 						<p class="console-text game-text" id="runningText">Une partie est en cours...</p>
 
 						<!-- Player fail -->
-						<p class="console-text game-text" id="failedText">Partie terminée, vous vous êtes trompé.</p>
+						<p class="console-text game-text" id="failedText">Partie terminée.</p>
 
 						<!-- Game is finish -->
-						<p class="console-text game-text" id="finishText">Vous avez gagné la partie ! Vous êtes juste incroyable !</p>
+						<p class="console-text game-text" id="finishText">Vous avez gagné la partie !</p>
 
 					</div>
 
-					<div class="col-1 h-64">	
+					<div class="col-lg-1 col-xl-1 h-64 hide-r">	
 
 						<p class="col-t col-t-64"></p>
 
@@ -155,31 +154,31 @@
 
 				<div class="row bg-sec2">
 
-					<div class="col-1 h-264">
+					<div class="col-lg-1 col-xl-1 h-264 hide-r">
 
 					   <p class="col-t col-t-264"></p>
 
 					</div>
 
-					<div class="col-2 h-264">  
+					<div class="col-lg-2 col-xl-2 h-264 hide-r">  
 
 						<p class="col-t col-t-264"></p>
 
 					</div>			
 
-					<div class="col-3 h-264 pt-15 pb-15"> 
+					<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 h-264 pt-15 pb-15"> 
 
 						<button id="btnTopLeft" class="btn-color btn-green">Vert</button>
 
 					</div>
 
-					<div class="col-3 h-264 pt-15 pb-15">   
+					<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 h-264 pt-15 pb-15">    
 
 						<button id="btnTopRight" class="btn-color btn-red">Rouge</button>
 
 					</div>
 					
-					<div class="col-2 h-264 pt-15">	
+					<div class="col-lg-2 col-xl-2 h-264 pt-15 hide-r">	
 
 						<p class="col-t col-t-264">Action(s)</p>
 
@@ -187,13 +186,11 @@
 
 						<button type="button" id="btnStart" class="btn btn-outline-light">Start</button>
 
-						<button type="button" id="btnStop" class="btn btn-outline-light mt-10">Stop</button>
-
-						<button type="button" class="btn btn-outline-light mt-10">Ré-initialiser</button>
+						<a class="btn btn-outline-light mt-10" href="index.html">Ré-initialiser</a>
 
 					</div>
 
-					<div class="col-1 h-264">   
+					<div class="col-lg-1 col-xl-1 h-264 hide-r">   
 
 						<p class="col-t col-t-264"></p>
 
@@ -203,25 +200,31 @@
 
 				<div class="row bg-sec3">
 
-					<div class="col-1 h-264">
+					<div class="col-lg-1 col-xl-1 h-264 hide-r">
 
 					   <p class="col-t col-t-264"></p>
 
 					</div>
-					<div class="col-2 h-264">  <p class="col-t col-t-264"></p></div>				
-					<div class="col-3 h-264 pt-15 pb-15"> 
+
+					<div class="col-lg-2 col-xl-2 h-264 hide-r">  
+
+						<p class="col-t col-t-264"></p>
+
+					</div>				
+					
+					<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 h-264 pt-15 pb-15"> 
 
 						<button id="btnBotLeft" class="btn-color btn-yellow">Jaune</button>
 
 					</div>
 
-					<div class="col-3 h-264 pt-15 pb-15">   
+					<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 h-264 pt-15 pb-15">    
 
 						<button id="btnBotRight" class="btn-color btn-blue">Bleu</button>
 
 					</div>
 					
-					<div class="col-2 h-264 pt-15">	
+					<div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 pt-15">	
 
 						<p class="col-t col-t-264">Information(s)</p>
 
@@ -229,43 +232,67 @@
 
 						<div class="row">
 
-							<div class="col-6">
+							<div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
 
 								<p class="col-t t-a-l">Tour(s)</p>
 
-								<p class="col-t t-a-l">Meilleur</p>
+								<p class="col-t t-a-l">Top</p>
 
-								<p class="col-t t-a-l">Niveau</p>
-
-							</div>
-
-							<div class="col-2">
-
-								<p>:</p>
-
-								<p>:</p>
-
-								<p>:</p>
+								<p class="col-t t-a-l">Level</p>
 
 							</div>
 
-							<div class="col-4">
+							<div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
 
-								<p id="turn" class="col-t t-a-r">
+								<p class="col-t"><i class="fas fa-arrow-right"></i></p>
+
+								<p class="col-t"><i class="fas fa-arrow-right"></i></p>
+
+								<p class="col-t"><i class="fas fa-arrow-right"></i></p>
+
+							</div>
+
+							<div class="col-5 col-sm-5 col-md-5 col-lg-6 col-xl-6">
+
+								<p id="turnInactiv" class="col-t t-a-r">
 									
-									<span id="turn" class='badge badge-warning'>Inactif</span>
+									<span class="badge badge-info">Inactif</span>
+
+								</p>
+
+								<p id="turnActiv" class="col-t t-a-r">
+
+									<span id="turn" class="badge badge-primary">0</span>
+
+								</p>
+
+								<p id="turnGG" class="col-t t-a-r">
+									
+									<span class='badge badge-success'>GG !</span>
+
+								</p>
+
+								<p id="turnFail" class="col-t t-a-r">
+									
+									<span class='badge badge-danger'>FAIL !</span>
 
 								</p>
 
 								<p class="col-t t-a-r">
 
-									<span id="turn" class='badge badge-warning'>0</span>
+									<span class='badge badge-warning'>
+
+										<span id="top">0</span> 
+
+										Tour(s)
+
+									</span>
 
 								</p>
 
 								<p class="col-t t-a-r">
 
-									<span id="top" class='badge badge-info'>Normal</span>
+									<span class='badge badge-info'>Normal</span>
 
 								</p>
 
@@ -277,7 +304,7 @@
 
 					</div>
 
-					<div class="col-1 h-264">   
+					<div class="col-lg-1 col-xl-1 h-264 hide-r">   
 
 						<p class="col-t col-t-264"></p>
 
@@ -287,13 +314,13 @@
 
 				<div class="row bg-sec4">
 
-					<div class="col-3 h-64">
+					<div class="col-lg-3 col-xl-3 h-64 hide-r">
 
 						<p class="col-t col-t-64"></p>
 
 					</div>
 					
-					<div class="col-6 h-64">	
+					<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 h-64">	
 
 						<div class="video-container" id="containerWelcomeVideo">
 
@@ -333,7 +360,7 @@
 
 					</div>
 					
-					<div class="col-3 h-64">	
+					<div class="col-lg-3 col-xl-3 h-64 hide-r">	
 
 						<p class="col-t col-t-64"></p>
 
@@ -382,8 +409,9 @@
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 
 	    <!-- Personal JS -->
-	    <script src="js/script.js"></script>
 	    <script src="js/effects.js"></script>
+	    <script src="js/script.js"></script>
+	    
 	</body>
 
 </html>
