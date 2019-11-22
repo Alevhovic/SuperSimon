@@ -17,6 +17,8 @@ let gameRunning = false;
 let order = [];
 let playerOrder = [];
 
+var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)top\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
 // --------------------------------------------------------------------------------------------------
 // -- Configuration
 // --------------------------------------------------------------------------------------------------
@@ -53,6 +55,28 @@ const welcomeVideo  = document.querySelector("#containerWelcomeVideo");
 // Modal Element
 const beReadyDude   = document.querySelector("#beReadyDude");
 
+
+
+function getCookieVal(offset) {
+  var endstr=document.cookie.indexOf (";", offset);
+  if (endstr==-1) endstr=document.cookie.length;
+  return unescape(document.cookie.substring(offset, endstr));
+}
+function GetCookie (name) {
+  var arg=name+"=";
+  var alen=arg.length;
+  var clen=document.cookie.length;
+  var i=0;
+  while (i<clen) {
+    var j=i+alen;
+    if (document.cookie.substring(i, j)==arg) return getCookieVal (j);
+    i=document.cookie.indexOf(" ",i)+1;
+    if (i==0) break;
+  }
+  return null;
+}
+
+topScoreText.innerHTML = GetCookie("top");
 // --------------------------------------------------------------------------------------------------
 // -- Functions
 // --------------------------------------------------------------------------------------------------
@@ -331,6 +355,8 @@ function topScoreFunc(turn) {
 
         topScoreText.innerHTML = turn;
         topScore = topScoreCount;
+
+        document.cookie = "top ="+topScore;
         
     }
 
@@ -361,26 +387,31 @@ btnStart.addEventListener('click', (event) => {
 
     btnStart.style.display = "none";
 
-    textEffectStartGame();
 
-    setTimeout(() => {
 
-        beReadyDude.style.display = "block";
-        gameRunning = false;
+    gameRunning = true;
 
-    },10); 
-
-    setTimeout(() => {
-
-        beReadyDude.style.display = "none";
-        play();
-
-    },4500);  
-  
     if (gameRunning || win) { 
 
-        debugFunc("g","Is now start");  
-        play();     
+        setTimeout(() => {
+
+            beReadyDude.style.display = "block";        
+            textEffectStartGame();
+
+        },1);
+
+        setTimeout(() => {
+
+            beReadyDude.style.display = "none";
+                 
+        },4500);
+    
+        setTimeout(() => {
+
+            debugFunc("g","Is now start");  
+            play();
+        
+        },4500);     
     }
 
 });
@@ -434,7 +465,7 @@ btnTopRight.addEventListener('click', (event) => {
 
 // BUTTON : BOTTOM LEFT
 btnBotLeft.addEventListener('click', (event) => {
-
+    
     debugFunc("p", "BTN 3 - Click")
     
     if (gameRunning) {
