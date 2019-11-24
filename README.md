@@ -34,3 +34,12 @@ This is a HTML/CSS/JS project. Have fun !
 
 # Screenshots
 
+Simon Game
+
+![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/master/img/Screenshot_1.PNG)
+
+Starting screen
+![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/master/img/Screenshot_2.PNG)
+
+Game Over screen
+![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/master/img/Screenshot_3.PNG)
