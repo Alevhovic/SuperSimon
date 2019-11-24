@@ -2,13 +2,17 @@ body{ background-color: #101010; }
 
 h1{ 
 
+	font-family: 'Permanent Marker', cursive;
 	padding-top: 20px;
 	font-size: 4.8rem; 
 	color: white;
 	text-shadow: 2px 2px 5px black;
+	letter-spacing: 2px;
 }
 
 h3{ font-size: 4rem; color: white; text-shadow: 2px 2px 6px black; text-align: center; }
+
+h4{ font-size: 6rem; font-family: 'Bangers', cursive; letter-spacing: 2px; }
 
 button{ width: 100%; }
 
@@ -58,6 +62,8 @@ video {
 
 .t-a-l { text-align: left; }
 .t-a-r { text-align: right; }
+
+.color-w{ color: white; text-shadow: 2px 2px 6px black; }
 
 /* ------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------- GRID / ZONING -------------------------------------------- */
@@ -145,6 +151,10 @@ video {
 
 .btn-yellow{ background-color: goldenrod; }
 
+.color-note-sound{ color:white; font-size: 2.5rem; }
+
+
+
 /* ------------------------------------------------------------------------------------------------------ */
 /* --------------------------------------------- TEXT PROPS --------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------------ */
@@ -160,6 +170,12 @@ video {
 /* ------------------------------------------------------------------------------------------------------ */
 /* ----------------------------------------------- MODALS ----------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------------ */
+
+.modalPerso{position: absolute; width: 100vw; height: 100vh; background-color: rgba(12,12,12,0.95); z-index: 9999; overflow: hidden; display: none;}
+
+#closeBtnContainer{position: absolute; top:0; right: 0; width: 64px; height: 64px;}
+
+#restartDoc{color:red; text-shadow: 2px 2px 6px black; font-size: 4rem;}
 
 /* ------------------------------------------------------------------------------------------------------ */
 /* ---------------------------------------------- ANIME JS ---------------------------------------------- */
@@ -203,6 +219,11 @@ video {
   	opacity: 0; 
 }
 
+.ml3 {
+  font-weight: 900;
+  font-size: 3.5em;
+}
+
 /* ------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------ ID'S ------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------ */
@@ -214,6 +235,13 @@ video {
 #welcomeVideo {transform: translateX(-50%) translateY(-50%);}
 
 #runningVideo {transform: translateX(-50%) translateY(-47.5%);}
+
+#note-rouge{ text-shadow: 1px 1px 3px red; }
+#note-green{ text-shadow: 1px 1px 3px green; }
+#note-jaune{ text-shadow: 1px 1px 3px yellow; }
+#note-bleu{ text-shadow: 1px 1px 3px royalblue; }
+
+#note-rouge, #note-green, #note-jaune, #note-bleu{ display: none; }
 
 /* ------------------------------------------------------------------------------------------------------ */
 /* -------------------------------------------- MEDIA QUERIES ------------------------------------------- */

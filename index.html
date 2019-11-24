@@ -10,6 +10,9 @@
 	    <!-- Bootstrap CSS -->
 	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+	    <!-- Google Fonts -->
+	    <link href="https://fonts.googleapis.com/css?family=Bangers|Permanent+Marker|Rubik+Mono+One&display=swap" rel="stylesheet">
+
 	    <!-- FontAwesome -->
 		<script src="https://kit.fontawesome.com/1b9214ce44.js" crossorigin="anonymous"></script>
 
@@ -35,15 +38,16 @@
 
 	</head>
 
-	<body>
+	<body onload="onLoad()">
 
-		<div id="beReadyDude" class="modal" style="position: absolute; width: 100vw; height: 100vh; background-color: rgba(12,12,12,0.95); display: none;">
+		<!-- MODAL : Attention, Prêt ?, C'est parti ! -->
+		<div id="beReadyDude" class="modalPerso">
 
 			<div class="container">			
 
 				<div class="col-12" style="padding-top: 33%;">
 
-					<div style="width: auto; height: 264px; border:2px solid white; border-radius: 8px;">
+					<div>
 
 						<!-- Start Game-->
 						<h3 class="ml4">			
@@ -55,6 +59,189 @@
 						</h3>
 
 					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<!-- MODAL : Game Over -->
+		<div id="GameOver" class="modalPerso">
+
+			<div class="container">
+
+				<div id="closeBtnContainer">
+
+					<!-- Le temps presse-->
+					<a id="restartDoc" href="index.html">
+
+						<span><i class="fas fa-times"></i></span>
+
+					</a>					
+
+				</div>			
+
+				<div class="col-12" style="padding-top: 33%;">
+
+					<div>
+
+						<div class="text-center">
+
+							<h4 class="color-w">Game Over</h4>
+
+						</div>
+
+					</div>
+
+					<div class="text-center">
+
+						<p class="color-w">Tu veux rejouer ?</p>
+
+					</div>
+
+					<div class="row">
+
+						<div class="col-4"></div>
+
+						<div class="col-4">
+							
+							<a class="btn btn-outline-light mt-10 btnRestart" href="index.html?restart=1">Restart</a>
+
+						</div>
+
+						<div class="col-4"></div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<!-- MODAL : Game Over -->
+		<div id="victoryBoy" class="modalPerso">
+
+			<div class="container">
+
+				<div id="closeBtnContainer">
+
+					<!-- Le temps presse-->
+					<a id="restartDoc" href="index.html">
+
+						<span><i class="fas fa-times"></i></span>
+
+					</a>					
+
+				</div>			
+
+				<div class="col-12" style="padding-top: 33%;">
+
+					<div>
+
+						<div class="text-center">
+
+							<h4 class="color-w">Victoire !</h4>
+
+						</div>
+
+					</div>
+
+					<div class="text-center">
+
+						<p class="color-w">Tu veux rejouer ?</p>
+
+					</div>
+
+					<div class="row">
+
+						<div class="col-4"></div>
+
+						<div class="col-4">
+							
+							<a class="btn btn-outline-light mt-10 btnRestart" href="index.html?restart=1">Restart</a>
+
+						</div>
+
+						<div class="col-4"></div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<!-- Modal Rules -->
+		<div id="modalRules" class="modalPerso">
+
+			<div class="container">
+				
+				<div class="row">
+
+					<div class="col-3"></div>
+
+					<div class="col-6 pt-15" style="background-color: white; height: 250px; border-radius: 8px; border:2px solid grey; box-shadow: 4px 4px 12 px black;">
+
+						<div class="row">
+
+							<div class="col-2">
+
+							</div>
+
+							<div class="col-8">
+
+								<div class="text-center">
+
+									<h5>Informations</h5>
+
+									<hr>
+
+								</div>
+
+							</div>
+
+							<div class="col-2">
+
+								<a class="btn btn-primary" href="index.html" role="button"><i class="fas fa-times-circle"></i></a>
+
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col-2">
+								
+								<p></p>
+
+								<p></p>
+
+								<p></p>
+
+								<p></p>
+
+							</div>
+
+							<div class="col-10">
+
+								<p>La partie se joue en 20 manches !</p>
+
+								<p>Pas le droit de tricher !</p>
+
+								<p>Obligation de s'amuser !</p>
+
+								<p>Faites de votre mieux !</p>
+
+							</div>
+
+						</div>
+
+					</div>
+					
+					<div class="col-3"></div>
 
 				</div>
 
@@ -77,7 +264,9 @@
     				</ul>
 
     				<span class="navbar-text">
-      					<button type="button" class="btn btn-outline-light"><i class="fas fa-palette"></i></button>
+      					<button type="button" class="btn btn-outline-light" id="btnOpenModalR">
+      						<i class="far fa-question-circle"></i></i>
+      					</button>
     				</span>
 
   				</div>
@@ -99,7 +288,7 @@
 
 							<span class="text-wrapper">
 
-							<span class="letters">Simon</span>
+							<span class="letters">Simon Js</span>
 
 							</span>
 
@@ -168,13 +357,13 @@
 
 					<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 h-264 pt-15 pb-15"> 
 
-						<button id="btnTopLeft" class="btn-color btn-green">Vert</button>
+						<button id="btnTopLeft" class="btn-color btn-green"><span id="note-green" class="color-note-sound">Do</span></button>
 
 					</div>
 
 					<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 h-264 pt-15 pb-15">    
 
-						<button id="btnTopRight" class="btn-color btn-red">Rouge</button>
+						<button id="btnTopRight" class="btn-color btn-red"><span id="note-rouge" class="color-note-sound">Ré</span></button>
 
 					</div>
 					
@@ -214,13 +403,13 @@
 					
 					<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 h-264 pt-15 pb-15"> 
 
-						<button id="btnBotLeft" class="btn-color btn-yellow">Jaune</button>
+						<button id="btnBotLeft" class="btn-color btn-yellow"><span id="note-jaune" class="color-note-sound">Mi</span></button>
 
 					</div>
 
 					<div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 h-264 pt-15 pb-15">    
 
-						<button id="btnBotRight" class="btn-color btn-blue">Bleu</button>
+						<button id="btnBotRight" class="btn-color btn-blue"><span id="note-bleu" class="color-note-sound">Fa</span></button>
 
 					</div>
 					
@@ -240,9 +429,13 @@
 
 								<p class="col-t t-a-l">Level</p>
 
+								<p class="col-t t-a-l">Objectif</p>
+
 							</div>
 
 							<div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+
+								<p class="col-t"><i class="fas fa-arrow-right"></i></p>
 
 								<p class="col-t"><i class="fas fa-arrow-right"></i></p>
 
@@ -293,6 +486,12 @@
 								<p class="col-t t-a-r">
 
 									<span class='badge badge-info'>Normal</span>
+
+								</p>
+
+								<p class="col-t t-a-r">
+
+									<span id="scoreToWin" class='badge badge-info'></span>
 
 								</p>
 

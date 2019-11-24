@@ -23,7 +23,7 @@ var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)top\s*\=\s*([^;]*).*$)
 // -- Configuration
 // --------------------------------------------------------------------------------------------------
 
-const winValue = 5; // Value to win the game !
+const winValue = 20; // Value to win the game !
 const debug    = false; // true = MANY console.log
 
 // --------------------------------------------------------------------------------------------------
@@ -36,6 +36,8 @@ const btnTopRight   = document.querySelector("#btnTopRight");
 const btnBotLeft    = document.querySelector("#btnBotLeft");
 const btnBotRight   = document.querySelector("#btnBotRight");
 const btnStart      = document.querySelector("#btnStart");
+const btnRestart    = document.querySelector(".btnRestart");
+const btnOpenModalR = document.querySelector("#btnOpenModalR");
 
 // Text Element
 const runningText   = document.querySelector("#runningText");
@@ -46,6 +48,11 @@ const turnActiv     = document.querySelector("#turnActiv");
 const turnFail      = document.querySelector("#turnFail");
 const turnCounter   = document.querySelector("#turn");
 const topScoreText  = document.querySelector("#top");
+const greenText     = document.querySelector("#note-green");
+const yelloText     = document.querySelector("#note-jaune");
+const redText       = document.querySelector("#note-rouge");
+const blueText      = document.querySelector("#note-bleu");
+const scoreToWin    = document.querySelector("#scoreToWin");
 
 // Video Element
 const finishVideo   = document.querySelector("#containerFinishVideo");
@@ -54,32 +61,64 @@ const welcomeVideo  = document.querySelector("#containerWelcomeVideo");
 
 // Modal Element
 const beReadyDude   = document.querySelector("#beReadyDude");
+const gameOver      = document.querySelector("#GameOver");
+const victoryBoy    = document.querySelector("#victoryBoy");
+const modalRules    = document.querySelector("#modalRules");
 
-
-
-function getCookieVal(offset) {
-  var endstr=document.cookie.indexOf (";", offset);
-  if (endstr==-1) endstr=document.cookie.length;
-  return unescape(document.cookie.substring(offset, endstr));
-}
-function GetCookie (name) {
-  var arg=name+"=";
-  var alen=arg.length;
-  var clen=document.cookie.length;
-  var i=0;
-  while (i<clen) {
-    var j=i+alen;
-    if (document.cookie.substring(i, j)==arg) return getCookieVal (j);
-    i=document.cookie.indexOf(" ",i)+1;
-    if (i==0) break;
-  }
-  return null;
-}
-
-topScoreText.innerHTML = GetCookie("top");
+scoreToWin.innerHTML = winValue;
 // --------------------------------------------------------------------------------------------------
 // -- Functions
 // --------------------------------------------------------------------------------------------------
+
+function onLoad() {
+
+    var urlParams = new URLSearchParams(window.location.search);
+
+    param = urlParams.toString();
+
+    if (param == "restart=1") {
+
+        welcomeContainer.style.display = "none";
+        chooseText.style.display       = "none";    
+        finishText.style.display       = "none";
+        failedText.style.display       = "none";
+        runningText.style.display      = "block";
+
+        welcomeVideo.style.display = "none";
+        finishVideo.style.display  = "none";
+        runningVideo.style.display = "block";
+
+        turnInactiv.style.display = "none";    
+        turnGG.style.display      = "none";
+        turnFail.style.display    = "none";
+        turnActiv.style.display   = "block";   
+
+        btnStart.style.display = "none";
+
+        gameRunning = true;
+
+        setTimeout(() => {
+
+            beReadyDude.style.display = "block";        
+            textEffectStartGame();
+
+        },1);
+
+        setTimeout(() => {
+
+            beReadyDude.style.display = "none";
+                 
+        },4500);
+    
+        setTimeout(() => {
+
+            debugFunc("g","Is now start");  
+            play();
+        
+        },4500);
+    }
+
+}
 
 // Debug
 function debugFunc(who,text) {
@@ -110,6 +149,36 @@ function debugFunc(who,text) {
     }
 }
 
+// GetCookieVal
+function getCookieVal(offset) {
+
+    var endstr=document.cookie.indexOf (";", offset);
+
+    if (endstr==-1) endstr=document.cookie.length;
+
+    return unescape(document.cookie.substring(offset, endstr));
+}
+
+// GetCookie Yum Yum
+function GetCookie (name) {
+
+    var arg=name+"=";
+    var alen=arg.length;
+    var clen=document.cookie.length;
+    var i=0;
+
+    while (i<clen) {
+        var j=i+alen;
+        if (document.cookie.substring(i, j)==arg) return getCookieVal (j);
+        i=document.cookie.indexOf(" ",i)+1;
+        if (i==0) break;
+    }
+    return null;
+}
+
+// If the player reload the page he still have the top score
+topScoreText.innerHTML = GetCookie("top");
+
 // Play
 function play() {
 
@@ -131,7 +200,6 @@ function play() {
     }
 
     compTurn = true;
-
     intervalId = setInterval(gameTurn, 1000);
 }
 
@@ -143,20 +211,15 @@ function gameTurn() {
     if (flash == turn) {      
 
         clearInterval(intervalId);
-
         compTurn = false;
-
         btnClearColor();
-
         gameRunning = true; 
-
         debugFunc("g", "Computer have finish.");
     }
 
     if (compTurn) {
 
         debugFunc("g","Computer choose a button.");
-
         btnClearColor();
 
         setTimeout(() => {
@@ -187,6 +250,19 @@ function btnOne() {
     
     noise = true;
     btnTopLeft.style.backgroundColor = "lightgreen";
+
+    setTimeout(() => {
+
+        greenText.style.display = "block";
+
+    },1);
+
+    setTimeout(() => {
+        
+        greenText.style.display = "none";
+
+    },999);
+    
 }
 
 // BTN : TOP RIGHT (Sound & Background when clicking)
@@ -202,6 +278,18 @@ function btnTwo() {
 
     noise = true;
     btnTopRight.style.backgroundColor = "tomato";
+
+    setTimeout(() => {
+
+        redText.style.display = "block";
+
+    },1);
+
+    setTimeout(() => {
+        
+        redText.style.display = "none";
+
+    },999);
 }
 
 // BTN : BOTTOM LEFT (Sound & Background when clicking)
@@ -217,6 +305,18 @@ function btnThree() {
 
     noise = true;
     btnBotLeft.style.backgroundColor = "yellow";
+
+    setTimeout(() => {
+
+        yelloText.style.display = "block";
+
+    },1);
+
+    setTimeout(() => {
+        
+        yelloText.style.display = "none";
+
+    },999);
 }
 
 // BTN : BOTTOM RIGHT (Sound & Background when clicking)
@@ -232,6 +332,18 @@ function btnFour() {
 
     noise = true;
     btnBotRight.style.backgroundColor = "royalblue";
+
+    setTimeout(() => {
+
+        blueText.style.display = "block";
+
+    },1);
+
+    setTimeout(() => {
+        
+        blueText.style.display = "none";
+
+    },999);
 }
 
 // COLOR ORIGIN ON BUTTON
@@ -280,8 +392,6 @@ if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1])
         finishText.style.display       = "none";
         failedText.style.display       = "block";
 
-        btnStart.style.display = "block";
-
         finishVideo.style.display  = "none";
         runningVideo.style.display = "none";
         welcomeVideo.style.display = "block";
@@ -290,6 +400,8 @@ if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1])
         turnActiv.style.display   = "none";
         turnGG.style.display      = "none";
         turnFail.style.display    = "block";
+
+        gameOver.style.display = "block";
 
         btnFlashColor();
                 
@@ -323,12 +435,12 @@ function winGame(turn) {
     runningVideo.style.display = "none";
     finishVideo.style.display  = "block";
 
-    btnStart.style.display = "block";
-
     turnInactiv.style.display = "none";
     turnActiv.style.display   = "none";
     turnFail.style.display    = "none";
     turnGG.style.display      = "block";
+
+    victoryBoy.style.display      = "block";
 
     btnFlashColor();
     
@@ -362,6 +474,15 @@ function topScoreFunc(turn) {
 
 }
 
+function playerHaveRestart() {
+
+    // If your expected result is "http://foo.bar/?x=1&y=2&x=42"
+    url.searchParams.append('restart', 1);
+
+    // If your expected result is "http://foo.bar/?x=42&y=2"
+    url.searchParams.set('restart', 1);
+}
+
 // --------------------------------------------------------------------------------------------------
 // -- EVENTS : CLICK
 // --------------------------------------------------------------------------------------------------
@@ -386,8 +507,6 @@ btnStart.addEventListener('click', (event) => {
     turnActiv.style.display   = "block";   
 
     btnStart.style.display = "none";
-
-
 
     gameRunning = true;
 
@@ -509,3 +628,21 @@ btnBotRight.addEventListener('click', (event) => {
     }
 
 });
+
+// BUTTON : RESTART
+btnRestart.addEventListener('click', (event) => {
+
+    debugFunc("p", "BTN RESTART - Click");
+
+});
+
+// BUTTON : MODAL RULES
+btnOpenModalR.addEventListener('click', (event) => {
+
+    debugFunc("p", "BTN MODAL - Click");
+
+    modalRules.style.display = "block";
+
+});
+
+

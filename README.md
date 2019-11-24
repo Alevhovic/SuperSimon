@@ -17,18 +17,14 @@ This is a HTML/CSS/JS project. Have fun !
 
 # Work In Progress
 
-- A functionnality
-- A functionnality
-- A functionnality
+- Make the game run faster after 8 rounds
+
 
 # Complete
 
 - Build the repository
 - Add the "master of JS" as contributor
-- A functionnality
-- A functionnality
-- A functionnality
+- Build the HTML, CSS, JS files
+- A "little" design
 
 # This open source project
-
-You can use it, release and do modifications. BUT YOU CANNOT SELL IT / ASK SOMETHING LIKE BITCOIN FOR A TRADE (GFY if you do something like this).
