@@ -18,7 +18,7 @@ This is a HTML/CSS/JS project. Have fun !
 # Work In Progress
 
 - Make the game run faster after 8 rounds
-
+- Change the level Normal to Hard
 
 # Complete
 
@@ -26,5 +26,11 @@ This is a HTML/CSS/JS project. Have fun !
 - Add the "master of JS" as contributor
 - Build the HTML, CSS, JS files
 - A "little" design
+- Make the "rules" modal
+- Make Victory, Loose, Starting screen
+- Create a cookie to remember the "topScore"
+- Add songs
+- Add videos (useless but nice on my screen).
 
-# This open source project
+# Screenshots
+
