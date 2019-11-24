@@ -36,10 +36,10 @@ This is a HTML/CSS/JS project. Have fun !
 
 Simon Game
 
-![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/tree/master/img/Screenshot_1.PNG)
+![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/master/screenshot_1.PNG)
 
 Starting screen
-![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/tree/master/img/Screenshot_2.PNG)
+![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/master/screenshot_2.PNG)
 
 Game Over screen
-![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/tree/master/img/Screenshot_3.PNG)
+![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/master/screenshot_3.PNG)
