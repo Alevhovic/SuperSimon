@@ -39,7 +39,9 @@ Simon Game
 ![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/master/screenshot_1.PNG)
 
 Starting screen
+
 ![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/master/screenshot_2.PNG)
 
 Game Over screen
+
 ![alt text](https://raw.githubusercontent.com/Alevhovic/SuperSimon/master/screenshot_3.PNG)
