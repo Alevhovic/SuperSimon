@@ -23,7 +23,6 @@ This is a HTML/CSS/JS project. Have fun !
 # Complete
 
 - Build the repository
-- Add the "master of JS" as contributor
 - Build the HTML, CSS, JS files
 - A "little" design
 - Make the "rules" modal
